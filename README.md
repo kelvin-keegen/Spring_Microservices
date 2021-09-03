@@ -1,2 +1,2 @@
 # Spring_Microservices
- A project showcasing microservices in Spring
+ A project showcasing microservices in Spring using Spring Boot
