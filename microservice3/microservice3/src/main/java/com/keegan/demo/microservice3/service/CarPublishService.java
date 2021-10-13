@@ -3,7 +3,6 @@ package com.keegan.demo.microservice3.service;
 import com.keegan.demo.microservice3.entity.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -11,12 +10,13 @@ import java.util.List;
 @AllArgsConstructor
 public class CarPublishService {
 
-    private final WebClient.Builder clientbuilder;
-
-    private List<BodyDetails> AllbodyDetails;
+    private final Engine_API engineAPI;
+    private final Luxury_API luxuryAPI;
 
     private final String microserice1 = "http://localhost:7001/engine?engineType=";
     private final String microserice2 = "http://localhost:7002/luxury?performanceType=";
+
+    private List<BodyDetails> AllbodyDetails;
 
 
     public List<BodyDetails> SaveAllModels(List<BodyDetails> cars) {
@@ -40,7 +40,6 @@ public class CarPublishService {
         return null;
     }
 
-
     public Car ConsumeData(CarRequestBody carRequestBody) {
 
         // Parsing request body
@@ -51,37 +50,19 @@ public class CarPublishService {
 
         // Get service 1 Data
 
-        Engine grabbedEngine = clientbuilder.build()
-                .get()
-                .uri(microserice1+engineType)
-                .retrieve()
-                .bodyToMono(Engine.class)
-                .block();
-
-        System.out.println("Grabbed engine: "+grabbedEngine);
+        Engine grabbedEngine = engineAPI.engineApi_response(microserice1,engineType);
 
         // Get service 2 Data
 
-        LuxuryType grabbedLuxuryType = clientbuilder.build()
-                .get()
-                .uri(microserice2+performanceType)
-                .retrieve()
-                .bodyToMono(LuxuryType.class)
-                .block();
+        LuxuryType grabbedLuxuryType = luxuryAPI.luxuryApi_response(microserice2,performanceType);
 
-        System.out.println("Grabbed LuxuryTpe: "+grabbedLuxuryType);
-
-        // Getting BodyDetals
-
-        // Get Body details (Because class is here)
+        // Getting BodyDetails
 
         BodyDetails formedBody = PublishBodyDetails(bodyType);
 
         // Merge data objects
 
         if (grabbedEngine != null && grabbedLuxuryType != null && !bodyType.isEmpty()) {
-
-
 
             Car requestedCar = new Car(
                     grabbedEngine.getType_name(),
@@ -93,10 +74,8 @@ public class CarPublishService {
                     grabbedLuxuryType.getPrice(),
                     formedBody
             );
-
             return requestedCar;
         }
-
         return null;
 
     }
