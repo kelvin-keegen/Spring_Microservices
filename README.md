@@ -1,7 +1,7 @@
 # Spring_Microservices
  A project showcasing microservices in Spring using Spring Boot
  
- #Sample request
+ # Sample request
  
  {
     "engineType":"v6",
@@ -10,7 +10,7 @@
 }
  
  
- #Sample response
+ # Sample response
  
  {
     "type_name": "V6",
