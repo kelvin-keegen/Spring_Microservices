@@ -1,5 +1,6 @@
 # Spring_Microservices
- A project showcasing microservices in Spring using Spring Boot
+ A project showcasing microservices in Spring using Spring Boot.
+ 
  Added Hystrix for fault tolerance.
  
  # Sample request
