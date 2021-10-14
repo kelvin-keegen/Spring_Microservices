@@ -2,6 +2,7 @@ package com.keegan.demo.microservice3.entity;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,6 +15,6 @@ public class Engine {
     private String id;
     private String type_name;
     private int type_cc;
-    private LocalDateTime createdIn;
+    private LocalDate createdIn;
 
 }

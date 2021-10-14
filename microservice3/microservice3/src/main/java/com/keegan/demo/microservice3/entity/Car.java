@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,7 +15,7 @@ public class Car {
     // Engine
     private String type_name;
     private int type_cc;
-    private LocalDateTime createdIn;
+    private LocalDate createdIn;
 
     // Luxury
     private String performanceType;

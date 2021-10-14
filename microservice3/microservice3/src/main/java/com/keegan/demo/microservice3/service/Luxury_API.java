@@ -2,6 +2,7 @@ package com.keegan.demo.microservice3.service;
 
 import com.keegan.demo.microservice3.entity.LuxuryType;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -12,7 +13,23 @@ public class Luxury_API {
 
     private final WebClient.Builder clientbuilder;
 
-    @HystrixCommand(fallbackMethod = "LuxuryTypeAPI_Fallback")
+    @HystrixCommand(fallbackMethod = "LuxuryTypeAPI_Fallback",
+            threadPoolKey = "luxuryAPI_threadpoolKey",
+            threadPoolProperties = {
+
+                    @HystrixProperty(name = "coreSize", value = "20"),
+                    @HystrixProperty(name = "maxQueueSize", value = "10"),
+
+            },
+
+            commandProperties = {
+
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "6"),
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000"),
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
+            }
+    )
     public LuxuryType luxuryApi_response(String link, String type) {
 
         LuxuryType returnedLuxuryType = clientbuilder.build()

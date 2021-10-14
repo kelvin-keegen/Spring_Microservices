@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,7 @@ public class EngineConfigs implements CommandLineRunner {
 
         System.out.println("Configuring demo data");
         String type;
-        LocalDateTime time = LocalDateTime.now();
+        LocalDate time = LocalDate.now();
 
         Engine v4 = new Engine(
 
