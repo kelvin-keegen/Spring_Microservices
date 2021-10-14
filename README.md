@@ -11,7 +11,7 @@
  ```
  
  # Sample response
- 
+```
 {
     "type_name": "V6",
     "type_cc": 2500,
@@ -26,4 +26,4 @@
         "extraOptions": false
     }
 }
- 
+``` 
