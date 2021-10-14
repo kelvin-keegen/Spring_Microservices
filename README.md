@@ -32,4 +32,4 @@
 
 # Demo Hystrix dashboard of APIs
 
-![alt text](https://github.com/kelvin-keegen/Spring_Microservices/blob/main/Screenshots/Screenshot%20from%202021-10-14%2017-52-42.png?raw=true)
+![alt text](https://github.com/kelvin-keegen/Spring_Microservices/blob/main/Screenshots/Screenshot1.png?raw=true)
