@@ -2,13 +2,13 @@
  A project showcasing microservices in Spring using Spring Boot
  
  # Sample request
- 
+ ```
  {
     "engineType":"v6",
     "performanceType":"sport",
     "bodyType":"suv"
 }
- 
+ ```
  
  # Sample response
  
