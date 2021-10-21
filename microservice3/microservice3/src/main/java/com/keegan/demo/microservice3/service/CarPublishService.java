@@ -1,5 +1,6 @@
 package com.keegan.demo.microservice3.service;
 
+import com.keegan.demo.microservice3.config.AppConfigs;
 import com.keegan.demo.microservice3.entity.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,16 +11,20 @@ import java.util.List;
 @AllArgsConstructor
 public class CarPublishService {
 
+    private final AppConfigs appConfigs;
+
     private final Engine_API engineAPI;
     private final Luxury_API luxuryAPI;
 
-    private final String microserice1 = "http://localhost:7001/engine?engineType=";
-    private final String microserice2 = "http://localhost:7002/luxury?performanceType=";
 
     private List<BodyDetails> AllbodyDetails;
 
 
     public List<BodyDetails> SaveAllModels(List<BodyDetails> cars) {
+
+        // Debugging links
+        System.out.println(appConfigs.getService1());
+        System.out.println(appConfigs.getService2());
 
         return AllbodyDetails = cars;
     }
@@ -50,11 +55,11 @@ public class CarPublishService {
 
         // Get service 1 Data
 
-        Engine grabbedEngine = engineAPI.engineApi_response(microserice1,engineType);
+        Engine grabbedEngine = engineAPI.engineApi_response(appConfigs.getService1(),engineType);
 
         // Get service 2 Data
 
-        LuxuryType grabbedLuxuryType = luxuryAPI.luxuryApi_response(microserice2,performanceType);
+        LuxuryType grabbedLuxuryType = luxuryAPI.luxuryApi_response(appConfigs.getService2(),performanceType);
 
         // Getting BodyDetails
 
