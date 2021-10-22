@@ -1,18 +1,18 @@
 package com.keegan.demo.microservice3.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "link")
-@RequiredArgsConstructor
+@ConfigurationProperties(prefix = "config")
+@RefreshScope
 public class AppConfigs {
 
     private String service1;
     private String service2;
     private String defaultlink;
-
+    private String port;
 
     public String getService1() {
         return service1;
@@ -36,5 +36,23 @@ public class AppConfigs {
 
     public void setDefaultlink(String defaultlink) {
         this.defaultlink = defaultlink;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    @Override
+    public String toString() {
+        return "AppConfigs{" +
+                "service1='" + service1 + '\'' +
+                ", service2='" + service2 + '\'' +
+                ", defaultlink='" + defaultlink + '\'' +
+                ", port='" + port + '\'' +
+                '}';
     }
 }
