@@ -69,6 +69,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>Microservice2-App</finalName>
 	</build>
 
 </project>
