@@ -17,13 +17,13 @@ public class PublishService {
 
     }
 
-    public Engine publishEngine(String enginetype) {
+    public Engine publishEngine(String engineType) {
 
         if (!All_engines.isEmpty()) {
 
             for (Engine all_engine : All_engines) {
 
-                if (all_engine.getType_name().equals(enginetype.toUpperCase())) {
+                if (all_engine.getType_name().equals(engineType.toUpperCase())) {
 
                     return all_engine;
                 }
@@ -35,7 +35,5 @@ public class PublishService {
         return null;
 
     }
-
-
 
 }

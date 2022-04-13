@@ -4,6 +4,7 @@ import com.keegan.demo.microservice3.entity.Engine;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class Engine_API {
 
     private final WebClient.Builder clientbuilder;
@@ -35,6 +37,8 @@ public class Engine_API {
     )
     public Engine engineApi_response(String link, String type) {
 
+        link = link+"/engine?engineType=";
+
         Engine returnedEngine = clientbuilder.build()
                 .get()
                 .uri(link+type)
@@ -42,7 +46,6 @@ public class Engine_API {
                 .bodyToMono(Engine.class)
                 .block();
 
-        System.out.println("Grabbed engine: "+returnedEngine);
 
         return returnedEngine;
     }
@@ -55,6 +58,8 @@ public class Engine_API {
                 0,
                 LocalDate.now()
         );
+
+        log.error("Engine API is down! returning null...");
 
         return none;
     }

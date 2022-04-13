@@ -4,11 +4,13 @@ import com.keegan.demo.microservice3.entity.LuxuryType;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class Luxury_API {
 
     private final WebClient.Builder clientbuilder;
@@ -32,14 +34,14 @@ public class Luxury_API {
     )
     public LuxuryType luxuryApi_response(String link, String type) {
 
+        link = link+"/luxury?performanceType=";
+
         LuxuryType returnedLuxuryType = clientbuilder.build()
                 .get()
                 .uri(link+type)
                 .retrieve()
                 .bodyToMono(LuxuryType.class)
                 .block();
-
-        System.out.println("Grabbed LuxuryTpe: "+returnedLuxuryType);
 
         return returnedLuxuryType;
     }
@@ -53,6 +55,8 @@ public class Luxury_API {
                 "N/A",
                 0.0
         );
+
+        log.error("Luxury API is down! returning null...");
 
         return none;
     }
