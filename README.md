@@ -3,6 +3,10 @@
  
  Added Hystrix for fault tolerance.
  
+ Start config server first to load App configurations before application start-up.
+ 
+ Jar files are in folder name "Jar-Files"
+ 
  # Sample request
  ```
  {
